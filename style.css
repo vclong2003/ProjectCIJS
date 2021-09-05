@@ -1,0 +1,268 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+}
+
+body,
+html {
+  font-family: roboto;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.justify-spaceBetween {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: end;
+}
+
+/* >>>>>>>>>> Form register, login <<<<<<<<<<<<< */
+
+.form-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.form-register {
+  background-image: url(assets/formRegister.png);
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+}
+
+.form {
+  width: 350px;
+  background-color: #0000004a;
+  padding: 24px;
+  border-radius: 4px;
+}
+
+.inputGroup {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  outline: none;
+  margin-bottom: 24px;
+  font-size: 18px;
+  color: white;
+}
+
+.inputGroup::placeholder {
+  color: rgba(255, 255, 255, 0.253);
+}
+
+.btnForm {
+  /* display: block; */
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  background-color: rgb(40 184 91);
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+  /* margin-bottom: 8px; */
+  font-size: 18px;
+  font-weight: 500;
+}
+.btnForm:hover {
+  background-color: rgb(34 161 79);
+}
+
+.btnForm-link {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  transition: 0.3s;
+  background-color: rgb(243, 183, 53);
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  margin-top: 16px;
+}
+
+.btnForm-link:hover {
+  background-color: rgb(204, 153, 44);
+}
+
+.error-msg {
+  color: rgb(204, 153, 44);
+  transform: translateY(-18px);
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* >>>>>>>>>>> Hall <<<<<<<<<<<<<<< */
+.hall-background {
+  background-image: url(assets/background2.png);
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+}
+
+/* >>>>>>>>>>>> header <<<<<<<<<<<<<< */
+.hall-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  color: white;
+  height: 15vh;
+  font-size: 20px;
+}
+
+.userName {
+  margin-left: 12px;
+  color: rgb(243, 183, 53);
+}
+
+.items {
+  cursor: pointer;
+  padding: 0 20px;
+  transition: 0.3s;
+}
+
+.items:hover {
+  color: rgb(243, 183, 53);
+}
+
+.rankNumber {
+  font-size: 52px;
+  text-align: center;
+  color: rgb(243, 183, 53);
+  font-weight: 600;
+}
+
+/* >>>>>>>>>>>> body <<<<<<<<<<<<<< */
+.hall-body {
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.typePlay {
+  background-color: #c31629;
+  height: 200px;
+  width: 300px;
+  color: white;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px 36px;
+  box-shadow: 3px 5px 4px 0 inset #00000073;
+  cursor: pointer;
+}
+
+.typePlaySolo,
+.typePlayWithFr {
+  padding: 30px;
+}
+
+
+/* >>>>>>>>>>>> footer <<<<<<<<<<<<<< */
+.hall-footer {
+  height: 25vh;
+  position: relative;
+}
+
+.imgWheel {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+}
+
+.ranking {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  left: 50px;
+  top: 50px;
+}
+
+.rankingImg {
+  left: 50px;
+  width: 80px;
+  height: 80px;
+  border: 2px solid white;
+  border-radius: 12px;
+  bottom: 20px;
+  cursor: pointer;
+  box-shadow: 1px 3px 8px 0 inset #eeeeee;
+  margin-right: 12px;
+}
+
+.music {
+  position: absolute;
+  right: 63px;
+  font-size: 32px;
+  color: white;
+  border: 2px solid white;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.music:hover i {
+  color: rgb(243, 183, 53);
+}
+
+.musicPlaying {
+  display: none;
+}
+
+.music.playing .musicPlaying {
+  display: block;
+}
+
+.music.playing .musicPause {
+  display: none;
+}
