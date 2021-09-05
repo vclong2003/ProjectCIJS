@@ -1,6 +1,7 @@
 import { InputGroup } from './InputGroup.js';
 import { Register } from './Register.js';
 import { setScreen } from '../setScreen.js';
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
 
 class Login {
     $container
@@ -22,7 +23,7 @@ class Login {
         this.$formLoginContainer = document.createElement('div')
         this.$formLogin = document.createElement('form')
         this.$formLogin.classList.add('form')
-        this.$formLogin.addEventListener('submit', this.handleLogin)
+        this.$formLogin.addEventListener('submit', this.handleLogin);
 
         this.$title = document.createElement('h2')
         this.$title.innerHTML = 'LOGIN '
@@ -68,6 +69,21 @@ class Login {
             this.$inputGroupPassword.setError('Password must be greater 6 character')
         }
 
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user);
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+          });
+      
     }
 
 
