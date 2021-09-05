@@ -97,6 +97,7 @@ class Register {
             this.$inputGroupConfirmPassword.value = ''
         }
 
+        const user = auth.currentUser;
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
