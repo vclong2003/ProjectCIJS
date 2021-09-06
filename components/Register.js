@@ -1,8 +1,6 @@
 import { InputGroup } from './InputGroup.js'
 import { Login } from './Login.js'
 import { setScreen } from '../setScreen.js'
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
-
 
 class Register {
     $container
@@ -97,6 +95,7 @@ class Register {
             this.$inputGroupConfirmPassword.value = ''
         }
 
+        /*
         const user = auth.currentUser;
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
@@ -112,6 +111,23 @@ class Register {
                 console.log(errorCode);
                 console.log(errorMessage);
             });
+            */
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+              // Signed in 
+              var user = userCredential.user;
+              console.log(user);
+              // ...
+            })
+            .catch((error) => {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log(errorCode);
+              console.log(errorMessage);
+              // ..
+            });
+          
 
     }
 

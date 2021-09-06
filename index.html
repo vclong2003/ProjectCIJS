@@ -19,25 +19,38 @@
     <div style="overflow: hidden" id="myApp">
         <audio id="audio" src="../assets/music.mp3"></audio>
     </div>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyB18mlNCaunkzyOTILMvFSmbJbB1ooSI-g",
-          authDomain: "project-final-ci-bced4.firebaseapp.com",
-          projectId: "project-final-ci-bced4",
-          storageBucket: "project-final-ci-bced4.appspot.com",
-          messagingSenderId: "364633664581",
-          appId: "1:364633664581:web:e92d1121726fa07309072c"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-      </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+    
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+              apiKey: "AIzaSyB18mlNCaunkzyOTILMvFSmbJbB1ooSI-g",
+              authDomain: "project-final-ci-bced4.firebaseapp.com",
+              projectId: "project-final-ci-bced4",
+              storageBucket: "project-final-ci-bced4.appspot.com",
+              messagingSenderId: "364633664581",
+              appId: "1:364633664581:web:e92d1121726fa07309072c"
+            };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const db = firebase.firestore();
+      const storage = firebase.storage();
+      const storageRef = storage.ref();
+    </script>
 </body>
 <script src="index.js" type="module"></script>
 </html>

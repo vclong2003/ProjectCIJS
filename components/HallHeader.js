@@ -1,5 +1,4 @@
 import { Item } from './Item.js'
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
 
 class HallHeader {
     $container
@@ -64,13 +63,13 @@ class HallHeader {
     }
 
     handleLogout = () => {
-        const auth = getAuth();
-        signOut(auth).then(() => {
-          // Sign-out successful.
-        }).catch((error) => {
-          // An error happened.
-        });
-    }
+      firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+        console.log("logged out");
+      }).catch((error) => {
+        // An error happened.
+      });
+      }
 
     render() {
         this.$user.appendChild(this.$userTxt)
