@@ -2,7 +2,6 @@ import { InputGroup } from './InputGroup.js';
 import { Register } from './Register.js';
 import { setScreen } from '../setScreen.js';
 
-
 class Login {
     $container
 
@@ -68,23 +67,6 @@ class Login {
         else if (password.length < 6) {
             this.$inputGroupPassword.setError('Password must be greater 6 character')
         }
-
-        /* ----------------------------------------------(ver 9)
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(user);
-            // ...
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
-          });
-          */
 
           firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {

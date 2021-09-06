@@ -95,23 +95,6 @@ class Register {
             this.$inputGroupConfirmPassword.value = ''
         }
 
-        /*
-        const user = auth.currentUser;
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
-                sendEmailVerification();
-                
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode);
-                console.log(errorMessage);
-            });
-            */
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
