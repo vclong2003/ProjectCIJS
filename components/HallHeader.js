@@ -1,92 +1,128 @@
-import { Item } from './Item.js'
+import { TutorialForm } from './TutorialForm.js'
+// import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
 
 class HallHeader {
-    $container
+  $container
 
-    $user
-    $userTxt
-    $userName
+  $user
+  $userTxt
+  $userName
 
-    $currentRank
-    $rankTxt
-    $rankNumber
+  $currentRank
+  $rankTxt
+  $rankNumber
 
-    $listItem
-    $tutorialIcon
-    $logOutIcon
-    $friendsIcon
-    $logoutArea
+  $listItem
+  $friendArea
+  $tutorialArea
+  $logoutArea
 
-    constructor() {
-        this.$container = document.createElement('div');
-        this.$container.classList.add('hall-header')
-
-
-        this.$user = document.createElement('div')
-        this.$user.classList.add('flex-1', 'flex')
-
-        this.$userTxt = document.createElement('div')
-        this.$userTxt.innerHTML = 'User: '
-
-        this.$userName = document.createElement('div')
-        this.$userName.innerHTML = 'userName@gmail.com'
-        this.$userName.classList.add('userName')
+  constructor() {
+    this.$container = document.createElement('div');
+    this.$container.classList.add('hall-header')
 
 
+    this.$user = document.createElement('div')
+    this.$user.classList.add('flex-1', 'flex')
 
-        this.$currentRank = document.createElement('div')
+    this.$userTxt = document.createElement('div')
+    this.$userTxt.innerHTML = 'Username: '
 
-        this.$rankTxt = document.createElement('div')
-        this.$rankTxt.innerHTML = 'Current rank :'
-        this.$rankTxt.style.fontSize = '16px'
-
-        this.$rankNumber = document.createElement('div')
-        this.$rankNumber.innerHTML = ' 100'
-        this.$rankNumber.classList.add('rankNumber')
+    this.$userName = document.createElement('div')
+    this.$userName.innerHTML = ''
+    this.$userName.classList.add('userName')
 
 
 
-        this.$listItem = document.createElement('ul')
-        this.$listItem.style.listStyle = 'none';
-        this.$listItem.style.marginLeft = 'auto';
-        this.$listItem.classList.add('flex', 'flex-1', 'flex-end')
+    this.$yourScore = document.createElement('div')
 
-        this.$friendsIcon = new Item('Friends', '<i class="fa fa-users"></i>')
-        this.$tutorialIcon = new Item('Tutorial', '<i class="fa fa-question-circle"></i>')
-        this.$logOutIcon = new Item('Log out', '<i class="fa fa-sign-out"></i>')
+    this.$scoreTxt = document.createElement('div')
+    this.$scoreTxt.innerHTML = 'Your score:'
+    this.$scoreTxt.style.fontSize = '16px'
+    this.$scoreTxt.style.textAlign = 'center'
 
-        this.$logoutArea = document.createElement('div');
-        this.$logoutArea.innerHTML = this.$logOutIcon.render();
-        
-        this.$logoutArea.addEventListener('click', this.handleLogout);
-
-    }
-
-    handleLogout = () => {
-      firebase.auth().signOut().then(() => {
-        // Sign-out successful.
-        console.log("logged out");
-      }).catch((error) => {
-        // An error happened.
-      });
-      }
-
-    render() {
-        this.$user.appendChild(this.$userTxt)
-        this.$user.appendChild(this.$userName)
-        this.$container.appendChild(this.$user)
+    this.$score = document.createElement('div')
+    this.$score.innerHTML = ' 0'
+    this.$score.classList.add('rankNumber')
 
 
-        this.$currentRank.appendChild(this.$rankTxt)
-        this.$currentRank.appendChild(this.$rankNumber)
-        this.$container.appendChild(this.$currentRank)
+
+    this.$listItem = document.createElement('ul')
+    this.$listItem.style.listStyle = 'none';
+    this.$listItem.style.marginLeft = 'auto';
+    this.$listItem.classList.add('flex', 'flex-1', 'flex-end')
 
 
-        this.$listItem.appendChild(this.$friendsIcon.render())
-        this.$listItem.appendChild(this.$tutorialIcon.render())
-        this.$listItem.appendChild(this.$logOutIcon.render())
-        this.$container.appendChild(this.$listItem)
-        return this.$container
-    }
+    this.$friendArea = document.createElement('div')
+    this.$friendArea.classList.add('items')
+    this.$friendArea.innerHTML = 'Friends'
+    this.$friendIcon = document.createElement('span')
+    this.$friendIcon.style.marginLeft = '8px'
+    this.$friendIcon.innerHTML = '<i class="fa fa-users"></i>'
+    this.$friendArea.appendChild(this.$friendIcon)
+
+
+    this.$tutorialArea = document.createElement('div')
+    this.$tutorialArea.addEventListener('click', this.handleTutorial)
+    this.$tutorialArea.classList.add('items')
+    this.$tutorialArea.innerHTML = 'Tutorial'
+    this.$TutorialIcon = document.createElement('span')
+    this.$TutorialIcon.style.marginLeft = '8px'
+    this.$TutorialIcon.innerHTML = '<i class="fa fa-question-circle"></i>'
+    this.$tutorialArea.appendChild(this.$TutorialIcon)
+
+    this.$tutorialForm = new TutorialForm()
+
+
+
+    this.$logOutArea = document.createElement('div')
+    this.$logOutArea.classList.add('items')
+    this.$logOutArea.innerHTML = 'Logout'
+    this.$logOutIcon = document.createElement('span')
+    this.$logOutIcon.style.marginLeft = '8px'
+    this.$logOutIcon.innerHTML = '<i class="fa fa-sign-out"></i>'
+    this.$logOutArea.appendChild(this.$logOutIcon)
+
+    this.$logOutArea.addEventListener('click', this.handleLogout);
+
+    db.collection('infoUser').onSnapshot(this.conservationListener)
+
+  }
+
+  conservationListener = (snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      const infoUser = change.doc.data()
+      const id = change.doc.id
+      this.$userName.innerHTML = infoUser.name
+    })
+  }
+
+
+  handleTutorial = () => {
+    this.$tutorialForm.setVisible(true)
+  }
+
+  handleLogout() {
+    firebase.auth().signOut();
+  }
+
+  render() {
+    this.$user.appendChild(this.$userTxt)
+    this.$user.appendChild(this.$userName)
+    this.$container.appendChild(this.$user)
+
+
+    this.$yourScore.appendChild(this.$scoreTxt)
+    this.$yourScore.appendChild(this.$score)
+    this.$container.appendChild(this.$yourScore)
+
+
+    this.$listItem.appendChild(this.$friendArea)
+    this.$listItem.appendChild(this.$tutorialArea)
+    this.$listItem.appendChild(this.$logOutArea)
+    this.$container.appendChild(this.$listItem)
+    this.$container.appendChild(this.$tutorialForm.render())
+    return this.$container
+  }
 }
 export { HallHeader }

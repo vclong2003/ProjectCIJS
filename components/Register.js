@@ -113,21 +113,31 @@ class Register {
             });
             */
 
-            firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
-              // Signed in 
-              var user = userCredential.user;
-              console.log(user);
-              // ...
+                // Signed in 
+                var user = userCredential.user;
+                console.log(user);
+                // ...
             })
             .catch((error) => {
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              console.log(errorCode);
-              console.log(errorMessage);
-              // ..
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+                // ..
             });
-          
+
+        // get data to firebase
+        db.collection('infoUser')
+            .add({
+                name: this.$inputGroupName.getInputValue(),
+                createdBy: this.$inputGroupEmail.getInputValue(),
+                users: [this.$inputGroupEmail.getInputValue()],
+            })
+            .then(() => {
+                // this.setVisible(false)
+            })
 
     }
 
