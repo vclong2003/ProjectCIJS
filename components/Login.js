@@ -2,7 +2,6 @@ import { InputGroup } from './InputGroup.js';
 import { Register } from './Register.js';
 import { setScreen } from '../setScreen.js';
 
-
 class Login {
     $container
 

@@ -1,7 +1,7 @@
-
 import { Login } from './components/Login.js'
 import { Hall } from './components/Hall.js'
 import { setScreen } from './setScreen.js'
+import { PlayNow } from './components/playNow.js';
 
 /* -----------------------------------------(firebase 9)
 const auth = getAuth();
@@ -18,15 +18,13 @@ onAuthStateChanged(auth, (user) => {
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
       var uid = user.uid;
-      const hall = new Hall();
-        setScreen(hall);
-      // ...
+     /* const hall = new Hall();
+        setScreen(hall); */
+
+        const test = new PlayNow();
+        setScreen(test);
     } else {
-      // User is signed out
-      // ...
       const login = new Login();
         setScreen(login)
     }
