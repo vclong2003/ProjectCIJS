@@ -293,8 +293,8 @@ html {
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  height: 180px;
-  background-color: rgba(0, 0, 0, 0.342);
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.281);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -312,7 +312,7 @@ html {
   border: none;
   outline: none;
   border-radius: 10px;
-  background-color: rgb(35, 111, 252);
+  background-color: rgb(66, 132, 255);
   color: white;
   cursor: pointer;
 }

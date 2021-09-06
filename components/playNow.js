@@ -48,7 +48,7 @@ class PlayNow {
         this.$user2.innerHTML = "user2@gmail.com";
         this.$user3.innerHTML = "user3@gmail.com";
         this.$user4_me.innerHTML = "user4@gmail.com";
-        this.$question.innerHTML = "In your Firebase Realtime Database and Cloud Storage Security Rules, you can get the signed-in user's unique user ID from the auth variable, and use it to control what data a user can access.";
+        this.$question.innerHTML = "In your Firebase Realtime Database and Cloud Storage Security Rules, you can get the signed-in user's unique user ID from the auth variable, and use it to control what data a user can access???";
     }
     render() {
         this.$questionAndAnswerContainer.appendChild(this.$question);

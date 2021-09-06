@@ -19,11 +19,8 @@ onAuthStateChanged(auth, (user) => {
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       var uid = user.uid;
-     /* const hall = new Hall();
-        setScreen(hall); */
-
-        const test = new PlayNow();
-        setScreen(test);
+      const hall = new Hall();
+      setScreen(hall);
     } else {
       const login = new Login();
         setScreen(login)
