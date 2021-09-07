@@ -1,4 +1,6 @@
-import { TypePlay } from './TypePlay.js'
+import { PlayNow } from './playNow.js';
+import { TypePlay } from './TypePlay.js';
+import { setScreen } from '../setScreen.js';
 
 class HallBody {
     $container
@@ -8,12 +10,16 @@ class HallBody {
 
     $typePlayWithFr
     $playWithFr
+
+    playNow;
     constructor() {
         this.$container = document.createElement('div')
         this.$container.classList.add('hall-body')
 
+        this.playNow = new PlayNow();
         this.$typePlaySolo = document.createElement('div')
         this.$typePlaySolo.classList.add('typePlaySolo')
+        this.$typePlaySolo.addEventListener('click', () => {setScreen(this.playNow)});
         this.$playNow = new TypePlay('<i class="fa fa-user"></i>', 'Play now')
 
         this.$typePlayWithFr = document.createElement('div')
@@ -22,10 +28,10 @@ class HallBody {
 
     }
     render() {
-        this.$typePlaySolo.appendChild(this.$playNow.render())
-        this.$typePlayWithFr.appendChild(this.$playWithFr.render())
-        this.$container.appendChild(this.$typePlaySolo)
-        this.$container.appendChild(this.$typePlayWithFr)
+        this.$typePlaySolo.appendChild(this.$playNow.render());
+        this.$typePlayWithFr.appendChild(this.$playWithFr.render());
+        this.$container.appendChild(this.$typePlaySolo);
+        this.$container.appendChild(this.$typePlayWithFr);
         return this.$container
     }
 }
