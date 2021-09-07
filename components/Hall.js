@@ -2,6 +2,7 @@ import { HallHeader } from './HallHeader.js'
 import { HallBody } from './HallBody.js'
 import { HallFooter } from './HallFooter.js'
 
+
 class Hall {
     $container
     $header
@@ -15,6 +16,7 @@ class Hall {
         this.$header = new HallHeader()
         this.$body = new HallBody()
         this.$footer = new HallFooter()
+
     }
 
     render() {
