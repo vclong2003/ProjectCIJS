@@ -1,5 +1,5 @@
 import { InputGroup } from "./InputGroup.js";
-import {setScreen} from '../setScreen.js';
+import { backToHall } from './Hall.js';
 
 class PlayNow {
 
@@ -31,7 +31,7 @@ class PlayNow {
         this.$homeButton = document.createElement('div');
         this.$homeButton.innerHTML = '◄ Home';
         this.$homeButton.classList.add('playnow-homebutton');
-        this.$homeButton.addEventListener('click', () => {})
+        this.$homeButton.addEventListener('click', backToHall)
         this.$header.appendChild(this.$homeButton);
         
         this.$content= document.createElement('div');
