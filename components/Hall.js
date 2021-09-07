@@ -25,7 +25,7 @@ class Hall {
     }
 }
 
-//  :( fixed
+
 const hall = new Hall();
 function backToHall() {
     setScreen(hall);
