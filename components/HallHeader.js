@@ -1,4 +1,9 @@
 import { TutorialForm } from './TutorialForm.js'
+<<<<<<< HEAD
+import { AddFriend } from './AddFriend.js'
+// import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
+=======
+>>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
 
 class HallHeader {
   $container
@@ -13,7 +18,9 @@ class HallHeader {
 
   $listItem
   $friendArea
+  $addFriend
   $tutorialArea
+  $tutorialForm
   $logoutArea
 
   constructor() {
@@ -53,6 +60,7 @@ class HallHeader {
 
 
     this.$friendArea = document.createElement('div')
+    this.$friendArea.addEventListener('click', this.handleFriend)
     this.$friendArea.classList.add('items')
     this.$friendArea.innerHTML = 'Friends'
     this.$friendIcon = document.createElement('span')
@@ -60,6 +68,8 @@ class HallHeader {
     this.$friendIcon.innerHTML = '<i class="fa fa-users"></i>'
     this.$friendArea.appendChild(this.$friendIcon)
 
+    this.$addFriend = new AddFriend()
+    this.$friendArea.appendChild(this.$addFriend.render())
 
     this.$tutorialArea = document.createElement('div')
     this.$tutorialArea.addEventListener('click', this.handleTutorial)
@@ -84,18 +94,28 @@ class HallHeader {
 
     this.$logOutArea.addEventListener('click', this.handleLogout);
 
-    db.collection('infoUser').onSnapshot(this.conservationListener)
+    db.collection('infoUser').where('email', '==', firebase.auth().currentUser.email).onSnapshot(this.infoUserListener)
 
   }
 
-  conservationListener = (snapshot) => {
+  infoUserListener = (snapshot) => {
     snapshot.docChanges().forEach((change) => {
+<<<<<<< HEAD
+
+      const infoUser = change.doc.data()
+      console.log(infoUser);
+      this.$userName.innerHTML = infoUser.name
+=======
       const infoUser = change.doc.data();
       const id = change.doc.id;
       this.$userName.innerHTML = infoUser.name;
+>>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
     })
   }
 
+  handleFriend = () => {
+    this.$addFriend.setVisibleFriend(true)
+  }
 
   handleTutorial = () => {
     this.$tutorialForm.setVisible(true)

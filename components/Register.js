@@ -115,8 +115,8 @@ class Register {
         db.collection('infoUser')
             .add({
                 name: this.$inputGroupName.getInputValue(),
-                createdBy: this.$inputGroupEmail.getInputValue(),
-                users: [this.$inputGroupEmail.getInputValue()],
+                email: this.$inputGroupEmail.getInputValue(),
+                friends: [],
             })
             .then(() => {
                 // this.setVisible(false)

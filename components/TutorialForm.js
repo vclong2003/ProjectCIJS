@@ -33,7 +33,6 @@ class TutorialForm {
 
     setVisible(visible) {
         if (visible) {
-
             this.$container.style.display = 'flex'
         } else {
             this.$container.style.display = 'none'

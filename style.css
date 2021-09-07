@@ -159,6 +159,7 @@ html {
   cursor: pointer;
   padding: 0 20px;
   transition: 0.3s;
+  position: relative;
 }
 
 .items:hover {
@@ -170,6 +171,46 @@ html {
   text-align: center;
   color: rgb(243, 183, 53);
   font-weight: 600;
+}
+
+.addFriend {
+  position: absolute;
+  width: 250px;
+  background-color: rgb(164, 51, 51);
+  right: 17px;
+  top: 36px;
+  border-radius: 8px;
+  height: 370px;
+  box-shadow: 2px 4px 8px 0 inset #eee5e56b;
+  padding: 16px;
+  cursor: default;
+  display: none;
+}
+.addFriend-form {
+  border-bottom: 1px solid white;
+  display: flex;
+  padding-bottom: 10px;
+}
+.addFriend-input {
+  padding: 5px;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 16px;
+  color: white;
+}
+
+.addFriend-input::placeholder {
+  color: rgba(255, 255, 255, 0.308);
+}
+.addFriend-btn {
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 24px;
+  color: orange;
+  cursor: pointer;
+  margin-left: -7px;
 }
 
 .tutorial-container {
@@ -356,8 +397,12 @@ html {
   height: 600px;
   border-radius: 360px;
   border: 2px solid #daa520;
+<<<<<<< HEAD
+  position: relative;
+=======
   position:relative;
   flex-grow: 1;
+>>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
 }
 .playnow-question-answer-container {
   width: 60%;
@@ -398,13 +443,12 @@ html {
   position: absolute;
 }
 .playnow-user1 {
-  top:48%;
-  left:-2%; 
+  top: 48%;
+  left: -2%;
 }
 .playnow-user3 {
-  top:48%;
-  right:-2%
-  ;
+  top: 48%;
+  right: -2%;
 }
 .playnow-user2 {
   left: 50%;

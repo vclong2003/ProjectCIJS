@@ -1,7 +1,12 @@
 import { HallHeader } from './HallHeader.js'
 import { HallBody } from './HallBody.js'
 import { HallFooter } from './HallFooter.js'
+<<<<<<< HEAD
+
+
+=======
 import {setScreen} from '../setScreen.js';
+>>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
 class Hall {
     $container
     $header
@@ -15,6 +20,7 @@ class Hall {
         this.$header = new HallHeader()
         this.$body = new HallBody()
         this.$footer = new HallFooter()
+
     }
 
     render() {
