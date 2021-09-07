@@ -1,6 +1,9 @@
 import { TutorialForm } from './TutorialForm.js'
+<<<<<<< HEAD
 import { AddFriend } from './AddFriend.js'
 // import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
+=======
+>>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
 
 class HallHeader {
   $container
@@ -97,10 +100,16 @@ class HallHeader {
 
   infoUserListener = (snapshot) => {
     snapshot.docChanges().forEach((change) => {
+<<<<<<< HEAD
 
       const infoUser = change.doc.data()
       console.log(infoUser);
       this.$userName.innerHTML = infoUser.name
+=======
+      const infoUser = change.doc.data();
+      const id = change.doc.id;
+      this.$userName.innerHTML = infoUser.name;
+>>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
     })
   }
 

@@ -1,8 +1,12 @@
 import { HallHeader } from './HallHeader.js'
 import { HallBody } from './HallBody.js'
 import { HallFooter } from './HallFooter.js'
+<<<<<<< HEAD
 
 
+=======
+import {setScreen} from '../setScreen.js';
+>>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
 class Hall {
     $container
     $header
@@ -27,4 +31,11 @@ class Hall {
     }
 }
 
-export { Hall }
+//  :( fixed
+const hall = new Hall();
+function backToHall() {
+    setScreen(hall);
+};
+
+export { Hall };
+export { backToHall };

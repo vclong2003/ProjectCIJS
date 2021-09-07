@@ -1,8 +1,12 @@
 import { InputGroup } from "./InputGroup.js";
+import { backToHall } from './Hall.js';
 
 class PlayNow {
 
     $container;
+
+    $header;
+    $homeButton;
 
     $content;
 
@@ -17,11 +21,19 @@ class PlayNow {
     $inputAnswer;
     $submitAnswerButton;
 
-
     constructor() {
         this.$container = document.createElement('div');
         this.$container.classList.add("playnow-container");
 
+        this.$header = document.createElement('div');
+        this.$header.classList.add('playnow-header');
+
+        this.$homeButton = document.createElement('div');
+        this.$homeButton.innerHTML = '◄ Home';
+        this.$homeButton.classList.add('playnow-homebutton');
+        this.$homeButton.addEventListener('click', backToHall)
+        this.$header.appendChild(this.$homeButton);
+        
         this.$content= document.createElement('div');
         this.$content.classList.add('playnow-content');
                                                     
@@ -61,6 +73,7 @@ class PlayNow {
         this.$content.appendChild(this.$user3);
         this.$content.appendChild(this.$user4_me);
 
+        this.$container.appendChild(this.$header);
         this.$container.appendChild(this.$content);
         return this.$container;
     }
