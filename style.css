@@ -397,12 +397,7 @@ html {
   height: 600px;
   border-radius: 360px;
   border: 2px solid #daa520;
-<<<<<<< HEAD
   position: relative;
-=======
-  position:relative;
-  flex-grow: 1;
->>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
 }
 .playnow-question-answer-container {
   width: 60%;

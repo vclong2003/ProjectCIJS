@@ -23,8 +23,20 @@ class AddFriend {
         this.$btn.innerHTML = '<i class="fa fa-plus-circle"></i>'
 
         // firebase k support OR nen:
-        db.collection('friends').where('a', '==', firebase.auth().currentUser.email).onSnapshot(this.friendListener)
-        db.collection('friends').where('b', '==', firebase.auth().currentUser.email).onSnapshot(this.friendListener)
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              var uid = user.uid;
+              db.collection('friends').where('a', '==', firebase.auth().currentUser.email).onSnapshot(this.friendListener);
+              db.collection('friends').where('b', '==', firebase.auth().currentUser.email).onSnapshot(this.friendListener);
+              // ...
+            } else {
+              // User is signed out
+              // ...
+            }
+          });
+          
     }
 
     handleAddFriend = (e) => {
@@ -33,7 +45,6 @@ class AddFriend {
             .add({
                 a: firebase.auth().currentUser.email,
                 b: this.$input.value
-
             })
             .then(() => {
                 // this.setVisible(false)

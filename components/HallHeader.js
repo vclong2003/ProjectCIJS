@@ -1,9 +1,5 @@
 import { TutorialForm } from './TutorialForm.js'
-<<<<<<< HEAD
 import { AddFriend } from './AddFriend.js'
-// import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
-=======
->>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
 
 class HallHeader {
   $container
@@ -80,7 +76,7 @@ class HallHeader {
     this.$TutorialIcon.innerHTML = '<i class="fa fa-question-circle"></i>'
     this.$tutorialArea.appendChild(this.$TutorialIcon)
 
-    this.$tutorialForm = new TutorialForm()
+    this.$tutorialForm = new TutorialForm();
 
 
 
@@ -94,22 +90,27 @@ class HallHeader {
 
     this.$logOutArea.addEventListener('click', this.handleLogout);
 
-    db.collection('infoUser').where('email', '==', firebase.auth().currentUser.email).onSnapshot(this.infoUserListener)
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        var uid = user.uid;
+        db.collection('infoUser').where('email', '==', firebase.auth().currentUser.email).onSnapshot(this.infoUserListener);
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
 
   }
 
   infoUserListener = (snapshot) => {
     snapshot.docChanges().forEach((change) => {
-<<<<<<< HEAD
 
       const infoUser = change.doc.data()
       console.log(infoUser);
       this.$userName.innerHTML = infoUser.name
-=======
-      const infoUser = change.doc.data();
-      const id = change.doc.id;
-      this.$userName.innerHTML = infoUser.name;
->>>>>>> 5e5ddd9090f99f54597233dfa2342f260bd05829
     })
   }
 
