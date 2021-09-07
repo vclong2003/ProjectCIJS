@@ -90,9 +90,9 @@ class HallHeader {
 
   conservationListener = (snapshot) => {
     snapshot.docChanges().forEach((change) => {
-      const infoUser = change.doc.data()
-      const id = change.doc.id
-      this.$userName.innerHTML = infoUser.name
+      const infoUser = change.doc.data();
+      const id = change.doc.id;
+      this.$userName.innerHTML = infoUser.name;
     })
   }
 
