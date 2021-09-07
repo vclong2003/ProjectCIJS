@@ -102,6 +102,16 @@ class Register {
                 var user = userCredential.user;
                 console.log(user);
                 // ...
+
+                    db.collection('infoUser')
+                    .add({
+                        name: this.$inputGroupName.getInputValue(),
+                        email: this.$inputGroupEmail.getInputValue(),
+                    })
+                    .then(() => {
+                        // this.setVisible(false)
+                    });
+
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -112,15 +122,7 @@ class Register {
             });
 
         // get data to firebase
-        db.collection('infoUser')
-            .add({
-                name: this.$inputGroupName.getInputValue(),
-                email: this.$inputGroupEmail.getInputValue(),
-                friends: [],
-            })
-            .then(() => {
-                // this.setVisible(false)
-            })
+        
 
     }
 

@@ -110,7 +110,7 @@ class HallHeader {
 
       const infoUser = change.doc.data()
       console.log(infoUser);
-      this.$userName.innerHTML = infoUser.name
+      this.$userName.innerHTML = infoUser.name;
     })
   }
 
