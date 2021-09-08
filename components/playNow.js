@@ -47,13 +47,17 @@ class PlayNow {
         this.$user4_me.classList.add("playnow-user-common", 'playnow-user4');
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/firebase.User
-              db.collection('infoUser').where('email', '==', firebase.auth().currentUser.email).onSnapshot(this.infoUserListener);
-              // ...
+              db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
+                .get()
+                .then((snapshot) => {
+                    snapshot.forEach((doc) => {
+                        this.$user4_me.innerHTML = doc.data().name;
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
             } else {
-              // User is signed out
-              // ...
             }
           });
 
@@ -74,14 +78,6 @@ class PlayNow {
         this.$question.innerHTML = "In your Firebase Realtime Database and Cloud Storage Security Rules, you can get the signed-in user's unique user ID from the auth variable, and use it to control what data a user can access.";
     }
 
-    infoUserListener = (snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-    
-          const infoUser = change.doc.data()
-          console.log(infoUser);
-          this.$user4_me.innerHTML = infoUser.name;
-        });
-    };
         render() {
         this.$questionAndAnswerContainer.appendChild(this.$question);
         this.$questionAndAnswerContainer.appendChild(this.$inputAnswer.render());
