@@ -294,6 +294,12 @@ html {
   margin: 0px 36px;
   box-shadow: 3px 5px 4px 0 inset #00000073;
   cursor: pointer;
+  transition: width 0.5s, height 0.5s, background-color 1s, transform 1s;
+}
+.typePlay:hover {
+  width: 350px;
+  height: 220px;
+  transform: rotate(15deg);
 }
 
 .typePlaySolo,
