@@ -388,13 +388,53 @@ html {
 .playnow-header {
   width: 100%;
   margin-bottom: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 .playnow-homebutton {
   color: white;
   cursor: pointer;
-  margin-left: 1%;
+  margin-right: 60%;
   font-size: larger;
   width: fit-content;
+}
+.pwf-invite-friends-area {
+  color: white;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.pwf-friendlist {
+  display: none;
+  font-size: larger;
+  position: absolute;
+  background-color: #eeeeee;
+  width: fit-content;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.685);
+  color: white;
+  z-index: 10;
+}
+.pwf-email-display {
+  background-color: rgba(66, 66, 66, 0.384);
+  margin-top: 6px;
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.pwf-email-display:hover {
+  background-color: rgb(49, 49, 49);
+}
+.pwf-close-button {
+  width: 10%;
+  margin: 2% 88%;
+  border-radius: 500px;
+  text-align: center;
+  cursor: pointer;
 }
 .playnow-content {
   width: 90%;
@@ -460,3 +500,4 @@ html {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+

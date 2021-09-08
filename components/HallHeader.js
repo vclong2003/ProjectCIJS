@@ -130,7 +130,6 @@ class HallHeader {
     this.$user.appendChild(this.$userName)
     this.$container.appendChild(this.$user)
 
-
     this.$yourScore.appendChild(this.$scoreTxt)
     this.$yourScore.appendChild(this.$score)
     this.$container.appendChild(this.$yourScore)
