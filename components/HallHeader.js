@@ -113,6 +113,7 @@ class HallHeader {
     })
   }
 
+
   handleFriend = () => {
     this.$addFriend.setVisibleFriend(true)
   }

@@ -8,6 +8,7 @@ class AddFriend {
         this.$container.classList.add('addFriend')
 
         this.$listFriend = document.createElement('ul')
+        this.$listFriend.style.listStyle = 'none'
 
 
         this.$form = document.createElement('form')
@@ -22,21 +23,26 @@ class AddFriend {
         this.$btn.classList.add('addFriend-btn')
         this.$btn.innerHTML = '<i class="fa fa-plus-circle"></i>'
 
+        this.$listFriendItem = []
+
         // firebase k support OR nen:
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/firebase.User
-              var uid = user.uid;
-              db.collection('friends').where('a', '==', firebase.auth().currentUser.email).onSnapshot(this.friendListener);
-              db.collection('friends').where('b', '==', firebase.auth().currentUser.email).onSnapshot(this.friendListener);
-              // ...
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                var uid = user.uid;
+
+                // firebase k support OR nen:
+                db.collection('friends').where('a', '==', firebase.auth().currentUser.email).onSnapshot(this.friendListener);
+                db.collection('friends').where('b', '==', firebase.auth().currentUser.email).onSnapshot(this.friendListener);
+                db.collection('infoUser').onSnapshot(this.infoUserListener);
+                // ...
             } else {
-              // User is signed out
-              // ...
+                // User is signed out
+                // ...
             }
-          });
-          
+        });
+
     }
 
     handleAddFriend = (e) => {
@@ -51,6 +57,7 @@ class AddFriend {
             })
     }
 
+
     friendListener = (snapshot) => {
         snapshot.docChanges().forEach((change) => {
 
@@ -61,11 +68,51 @@ class AddFriend {
             } else {
                 friendEmail = friends.a
             }
+
+
+
+            const $delFriend = document.createElement('button')
+            $delFriend.innerHTML = 'X'
+            $delFriend.classList.add('del-friend')
+
+
             const $li = document.createElement('li')
-            $li.innerHTML = friendEmail
+            $li.classList.add('list-friend-item')
+            $li.dataset.email = friendEmail
+            const $friend = document.createElement('div')
+            $friend.classList.add('friend')
+            this.$listFriendItem.push($li)
+
+
+
+
+            $friend.innerHTML = friendEmail
+            $li.appendChild($friend)
+            $li.appendChild($delFriend)
             this.$listFriend.appendChild($li)
+
         })
     }
+
+    infoUserListener = (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            const infoUser = change.doc.data()
+            this.$listFriendItem.forEach((item) => {
+                if (item.dataset.email == infoUser.email) {
+                    const greenDot = document.createElement('div')
+                    greenDot.classList.add('green-dot')
+                    item.appendChild(greenDot)
+
+
+                }
+            })
+
+        })
+    }
+
+
+
+
 
 
     setVisibleFriend(visible) {

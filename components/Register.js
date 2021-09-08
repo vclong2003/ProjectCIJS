@@ -103,10 +103,11 @@ class Register {
                 console.log(user);
                 // ...
 
-                    db.collection('infoUser')
+                db.collection('infoUser')
                     .add({
                         name: this.$inputGroupName.getInputValue(),
                         email: this.$inputGroupEmail.getInputValue(),
+                        isOnl: true,
                     })
                     .then(() => {
                         // this.setVisible(false)
@@ -122,7 +123,7 @@ class Register {
             });
 
         // get data to firebase
-        
+
 
     }
 
