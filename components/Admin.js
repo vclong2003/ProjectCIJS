@@ -37,7 +37,18 @@ class Admin {
 
     }
 
-    handleQuestion = () => {
+    handleQuestion = (e) => {
+        e.preventDefault();
+        if (!this.$inputAnswer.getInputValue() && !this.$inputQuesstion.getInputValue()) {
+            alert('Insert question and answer');
+        } else {
+            db.collection('questions').add({
+            question : this.$inputQuesstion.getInputValue(),
+            answer : this.$inputAnswer.getInputValue(),
+            }).then(() => {
+                console.log("Add success");
+            });
+        }
 
     }
 
