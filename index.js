@@ -14,7 +14,6 @@ firebase.auth().onAuthStateChanged((user) => {
       setScreen(hall);
     } else {
       const login = new Login();
-        setScreen(login)
+        setScreen(login);
     }
 });
-  

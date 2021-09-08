@@ -108,8 +108,7 @@ class HallHeader {
   infoUserListener = (snapshot) => {
     snapshot.docChanges().forEach((change) => {
 
-      const infoUser = change.doc.data()
-      console.log(infoUser);
+      const infoUser = change.doc.data();
       this.$userName.innerHTML = infoUser.name;
     })
   }
@@ -131,7 +130,6 @@ class HallHeader {
     this.$user.appendChild(this.$userTxt)
     this.$user.appendChild(this.$userName)
     this.$container.appendChild(this.$user)
-
 
     this.$yourScore.appendChild(this.$scoreTxt)
     this.$yourScore.appendChild(this.$score)
