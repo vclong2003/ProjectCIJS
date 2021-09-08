@@ -44,6 +44,10 @@ html {
   align-items: end;
 }
 
+.mar10 {
+  margin: 10px;
+}
+
 /* >>>>>>>>>> Form register, login <<<<<<<<<<<<< */
 
 .form-center {
