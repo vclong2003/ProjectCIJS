@@ -177,9 +177,10 @@ html {
   font-weight: 600;
 }
 
+/* >>>>>>>>>>>>> ADD Friend <<<<<<<<<<<<<< */
 .addFriend {
   position: absolute;
-  width: 250px;
+  width: 330px;
   background-color: rgb(164, 51, 51);
   right: 17px;
   top: 36px;
@@ -194,6 +195,7 @@ html {
   border-bottom: 1px solid white;
   display: flex;
   padding-bottom: 10px;
+  margin-bottom: 16px;
 }
 .addFriend-input {
   padding: 5px;
@@ -201,7 +203,8 @@ html {
   background: none;
   outline: none;
   font-size: 16px;
-  color: white;
+  color: orange;
+  width: 100%;
 }
 
 .addFriend-input::placeholder {
@@ -217,6 +220,53 @@ html {
   margin-left: -7px;
 }
 
+.list-friend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0px;
+  transition: 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.list-friend-item:hover {
+  color: rgb(231, 231, 231);
+}
+
+.list-friend-item:hover .del-friend {
+  background-color: white;
+}
+
+.friend {
+  width: 88%;
+  overflow-wrap: anywhere;
+  font-size: 16px;
+  padding-left: 12px;
+}
+.del-friend {
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  background-color: orange;
+  transition: 0.3s;
+}
+
+.green-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #57e157;
+  border-radius: 50px;
+  top: 11px;
+  z-index: 26;
+}
+
+/* >>>>>>>>>>>>>>>>> TUTORIAL <<<<<<<<<<<<<<<<<< */
 .tutorial-container {
   position: absolute;
   width: 100vw;
