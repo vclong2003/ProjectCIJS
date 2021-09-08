@@ -44,7 +44,18 @@ class PlayNow {
         this.$user3 = document.createElement('div'); 
         this.$user3.classList.add("playnow-user-common", 'playnow-user3');
         this.$user4_me = document.createElement('div');
-        this.$user4_me.classList.add("playnow-user-common", 'playnow-user4'); 
+        this.$user4_me.classList.add("playnow-user-common", 'playnow-user4');
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              db.collection('infoUser').where('email', '==', firebase.auth().currentUser.email).onSnapshot(this.infoUserListener);
+              // ...
+            } else {
+              // User is signed out
+              // ...
+            }
+          });
 
         this.$questionAndAnswerContainer = document.createElement('div');
         this.$questionAndAnswerContainer.classList.add('playnow-question-answer-container');
@@ -56,10 +67,11 @@ class PlayNow {
         this.$submitAnswerButton.innerHTML = "Submit";
 
 //------------------------------------------------------test
-        this.$user1.innerHTML = "user1@gmail.com";
-        this.$user2.innerHTML = "user2@gmail.com";
-        this.$user3.innerHTML = "user3@gmail.com";
-        this.$question.innerHTML = "In your Firebase Realtime Database and Cloud Storage Security Rules, you can get the signed-in user's unique user ID from the auth variable, and use it to control what data a user can access???";
+        this.$user1.innerHTML = "User1";
+        this.$user2.innerHTML = "User2";
+        this.$user3.innerHTML = "User3";
+        this.$user4_me.innerHTML = '';
+        this.$question.innerHTML = "In your Firebase Realtime Database and Cloud Storage Security Rules, you can get the signed-in user's unique user ID from the auth variable, and use it to control what data a user can access.";
     }
 
     infoUserListener = (snapshot) => {

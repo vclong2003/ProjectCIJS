@@ -108,8 +108,7 @@ class HallHeader {
   infoUserListener = (snapshot) => {
     snapshot.docChanges().forEach((change) => {
 
-      const infoUser = change.doc.data()
-      console.log(infoUser);
+      const infoUser = change.doc.data();
       this.$userName.innerHTML = infoUser.name;
     })
   }

@@ -17,4 +17,15 @@ firebase.auth().onAuthStateChanged((user) => {
         setScreen(login)
     }
 });
-  
+
+db.collection("infoUser").where("email", "==", "vclong2003@gmail.com")
+.get()
+.then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.data().name);
+    });
+})
+.catch((error) => {
+    console.log("Error getting documents: ", error);
+});

@@ -370,7 +370,7 @@ html {
   display: none;
 }
 
-/*---------- playNow ----------*/
+/*---- playNow, playWithFriends -----*/
 .playnow-container {
   background-image: url(assets/background2.png);
   width: 100%;
