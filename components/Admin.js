@@ -33,6 +33,7 @@ class Admin {
         this.$btnLogout = document.createElement('button');
         this.$btnLogout.innerHTML = 'Log out';
         this.$btnLogout.classList.add('btnForm');
+        this.$btnLogout.addEventListener('click', () => { firebase.auth().signOut() });
 
     }
 
