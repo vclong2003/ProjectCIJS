@@ -349,9 +349,8 @@ html {
 .typePlay:hover {
   width: 350px;
   height: 220px;
-  transform: rotate(15deg);
+  transform: rotate(8deg);
 }
-
 .typePlaySolo,
 .typePlayWithFr {
   padding: 30px;
