@@ -66,6 +66,9 @@ class HallHeader {
     this.$friendIcon.innerHTML = '<i class="fa fa-users"></i>'
     this.$friendArea.appendChild(this.$friendIcon)
 
+    this.$addFriend = new AddFriend()
+    this.$friendArea.appendChild(this.$addFriend.render())
+
 
     this.$tutorialArea = document.createElement('div')
     this.$tutorialArea.addEventListener('click', this.handleTutorial)
@@ -145,8 +148,8 @@ class HallHeader {
     this.$container.appendChild(this.$listItem)
     this.$container.appendChild(this.$tutorialForm.render())
 
-    this.$addFriend = new AddFriend()
-    this.$container.appendChild(this.$addFriend.render())
+    // this.$addFriend = new AddFriend()
+    // this.$container.appendChild(this.$addFriend.render())
     return this.$container
   }
 }
