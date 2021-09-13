@@ -102,8 +102,6 @@ class AddFriend {
                     const greenDot = document.createElement('div')
                     greenDot.classList.add('green-dot')
                     item.appendChild(greenDot)
-
-
                 }
             })
 
