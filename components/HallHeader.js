@@ -22,6 +22,8 @@ class HallHeader {
   constructor() {
     this.$container = document.createElement('div');
     this.$container.classList.add('hall-header')
+    this.$container.addEventListener('click', this.turnOff)
+
 
 
     this.$user = document.createElement('div')
@@ -64,8 +66,6 @@ class HallHeader {
     this.$friendIcon.innerHTML = '<i class="fa fa-users"></i>'
     this.$friendArea.appendChild(this.$friendIcon)
 
-    this.$addFriend = new AddFriend()
-    this.$friendArea.appendChild(this.$addFriend.render())
 
     this.$tutorialArea = document.createElement('div')
     this.$tutorialArea.addEventListener('click', this.handleTutorial)
@@ -105,6 +105,8 @@ class HallHeader {
 
   }
 
+
+
   infoUserListener = (snapshot) => {
     snapshot.docChanges().forEach((change) => {
 
@@ -117,6 +119,7 @@ class HallHeader {
   handleFriend = () => {
     this.$addFriend.setVisibleFriend(true)
   }
+
 
   handleTutorial = () => {
     this.$tutorialForm.setVisible(true)
@@ -141,6 +144,9 @@ class HallHeader {
     this.$listItem.appendChild(this.$logOutArea)
     this.$container.appendChild(this.$listItem)
     this.$container.appendChild(this.$tutorialForm.render())
+
+    this.$addFriend = new AddFriend()
+    this.$container.appendChild(this.$addFriend.render())
     return this.$container
   }
 }

@@ -14,22 +14,29 @@ class HallBody {
 
     playNow;
     playWithFriends;
-    constructor() {
+    constructor(header) {
         this.$container = document.createElement('div')
         this.$container.classList.add('hall-body')
+        this.$container.addEventListener('click', this.closeAddFriend)
 
         this.playNow = new PlayNow();
         this.$typePlaySolo = document.createElement('div')
         this.$typePlaySolo.classList.add('typePlaySolo')
-        this.$typePlaySolo.addEventListener('click', () => {setScreen(this.playNow)});
+        this.$typePlaySolo.addEventListener('click', () => { setScreen(this.playNow) });
         this.$playNow = new TypePlay('<i class="fa fa-user"></i>', 'Play now')
 
         this.playWithFriends = new PlayWithFriends();
         this.$typePlayWithFr = document.createElement('div')
         this.$typePlayWithFr.classList.add('typePlayWithFr')
-        this.$typePlayWithFr.addEventListener('click', () => {setScreen(this.playWithFriends)});
+        this.$typePlayWithFr.addEventListener('click', () => { setScreen(this.playWithFriends) });
         this.$playWithFr = new TypePlay('<i class="fa fa-users"></i>', 'Play with friends')
 
+        this.$header = header
+
+    }
+
+    closeAddFriend = () => {
+        this.$header.$addFriend.closeAddFriend(false)
     }
     render() {
         this.$typePlaySolo.appendChild(this.$playNow.render());

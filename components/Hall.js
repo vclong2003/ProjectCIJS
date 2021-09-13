@@ -3,6 +3,8 @@ import { HallBody } from './HallBody.js'
 import { HallFooter } from './HallFooter.js'
 import { setScreen } from '../setScreen.js';
 
+
+
 class Hall {
     $container
     $header
@@ -14,7 +16,7 @@ class Hall {
         this.$container.classList.add('hall-background')
 
         this.$header = new HallHeader()
-        this.$body = new HallBody()
+        this.$body = new HallBody(this.$header)
         this.$footer = new HallFooter()
 
     }
@@ -27,6 +29,9 @@ class Hall {
         return this.$container
     }
 }
+
+
+
 
 
 const hall = new Hall();
