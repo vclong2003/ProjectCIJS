@@ -182,8 +182,8 @@ html {
   position: absolute;
   width: 330px;
   background-color: rgb(164, 51, 51);
-  right: 326px;
-  top: 78px;
+  right: 21px;
+  top: 40px;
   border-radius: 8px;
   height: 370px;
   box-shadow: 2px 4px 8px 0 inset #eee5e56b;
@@ -566,8 +566,4 @@ html {
   top: 100%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5767022a06263103d9cd7fa02ea8206d82b7ed0b

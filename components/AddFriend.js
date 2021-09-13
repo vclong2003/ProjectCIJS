@@ -55,7 +55,8 @@ class AddFriend {
 
     }
 
-    closeAddFriend = () => {
+    closeAddFriend = (e) => {
+        e.stopPropagation();
         this.setVisibleFriend(false)
 
     }
@@ -82,7 +83,9 @@ class AddFriend {
 
             const friends = change.doc.data()
             const id = change.doc.id
-            console.log(id);
+            // console.log(id);
+            // console.log(change.type);
+            if (change.type == 'removed') return
             let friendEmail = ''
             if (firebase.auth().currentUser.email === friends.a) {
                 friendEmail = friends.b
@@ -157,12 +160,8 @@ class AddFriend {
     setVisibleFriend(visible) {
         if (visible) {
             this.$container.style.display = 'block'
-
-
         } else {
             this.$container.style.display = 'none'
-
-
         }
     }
 

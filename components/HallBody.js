@@ -17,7 +17,7 @@ class HallBody {
     constructor(header) {
         this.$container = document.createElement('div')
         this.$container.classList.add('hall-body')
-        this.$container.addEventListener('click', this.closeAddFriend)
+
 
         this.playNow = new PlayNow();
         this.$typePlaySolo = document.createElement('div')
@@ -35,9 +35,7 @@ class HallBody {
 
     }
 
-    closeAddFriend = () => {
-        this.$header.$addFriend.closeAddFriend(false)
-    }
+
     render() {
         this.$typePlaySolo.appendChild(this.$playNow.render());
         this.$typePlayWithFr.appendChild(this.$playWithFr.render());
