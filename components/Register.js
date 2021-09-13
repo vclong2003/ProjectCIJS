@@ -103,8 +103,8 @@ class Register {
                 console.log(user);
                 // ...
 
-                db.collection('infoUser')
-                    .add({
+                db.collection('infoUser').doc(this.$inputGroupEmail.getInputValue())
+                    .set({
                         name: this.$inputGroupName.getInputValue(),
                         email: this.$inputGroupEmail.getInputValue(),
                         isOnl: true,
