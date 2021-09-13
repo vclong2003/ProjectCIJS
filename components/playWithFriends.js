@@ -26,6 +26,8 @@ class PlayWithFriends {
     $inputAnswer;
     $submitAnswerButton;
 
+    player = [];
+
     constructor() {
         this.$container = document.createElement('div');
         this.$container.classList.add("playnow-container");
@@ -132,6 +134,39 @@ class PlayWithFriends {
             const $div = document.createElement('div')
             $div.innerHTML = friendEmail;
             $div.classList.add('pwf-email-display');
+            $div.addEventListener('click', () => {
+                if ( this.player.length < 3 && this.player.indexOf(friendEmail) < 0 ) {
+                    this.player.push(friendEmail)
+                    console.log(this.player)
+                    if (this.player[0]) {
+                        db.collection("infoUser").where("email", "==", this.player[0])
+                        .get()
+                        .then((snapshot) => {
+                            snapshot.forEach((doc) => {
+                                this.$user1.innerHTML = doc.data().name;
+                            })
+                        })
+                    }                                                            // player1
+                    if (this.player[1]) {
+                        db.collection("infoUser").where("email", "==", this.player[1])
+                        .get()
+                        .then((snapshot) => {
+                            snapshot.forEach((doc) => {
+                                this.$user2.innerHTML = doc.data().name;
+                            });
+                        });
+                    }                                                             // player2
+                    if (this.player[2]) {
+                        db.collection("infoUser").where("email", "==", this.player[2])
+                        .get()
+                        .then((snapshot) => {
+                            snapshot.forEach((doc) => {
+                                this.$user3.innerHTML = doc.data().name;
+                            })
+                        });
+                    }                                                              // player3
+                }
+            });
             this.$friendsList.appendChild($div);
         })
     }
