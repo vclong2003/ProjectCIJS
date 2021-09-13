@@ -38,7 +38,16 @@ class PlayWithFriends {
         this.$homeButton = document.createElement('div');
         this.$homeButton.innerHTML = '◄ Home';
         this.$homeButton.classList.add('playnow-homebutton');
-        this.$homeButton.addEventListener('click', backToHall)
+        this.$homeButton.addEventListener('click', () => {
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    db.collection("rooms").doc(firebase.auth().currentUser.email).delete().then(() => {
+                        console.log("Document successfully deleted!");
+                        backToHall();
+                    })
+                }
+              })
+        })
         this.$header.appendChild(this.$homeButton);
 
         this.$inviteFriendsArea = document.createElement('div');
@@ -145,7 +154,8 @@ class PlayWithFriends {
                             snapshot.forEach((doc) => {
                                 this.$user1.innerHTML = doc.data().name;
                             })
-                        })
+                        });
+                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player1: this.player[0] });
                     }                                                            // player1
                     if (this.player[1]) {
                         db.collection("infoUser").where("email", "==", this.player[1])
@@ -153,8 +163,9 @@ class PlayWithFriends {
                         .then((snapshot) => {
                             snapshot.forEach((doc) => {
                                 this.$user2.innerHTML = doc.data().name;
-                            });
+                            })
                         });
+                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player2: this.player[1] });
                     }                                                             // player2
                     if (this.player[2]) {
                         db.collection("infoUser").where("email", "==", this.player[2])
@@ -164,6 +175,7 @@ class PlayWithFriends {
                                 this.$user3.innerHTML = doc.data().name;
                             })
                         });
+                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player3: this.player[2] });
                     }                                                              // player3
                 }
             });
