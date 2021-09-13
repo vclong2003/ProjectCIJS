@@ -356,8 +356,13 @@ html {
   margin: 0px 36px;
   box-shadow: 3px 5px 4px 0 inset #00000073;
   cursor: pointer;
+  transition: width 0.5s, height 0.5s, background-color 1s, transform 1s;
 }
-
+.typePlay:hover {
+  width: 350px;
+  height: 220px;
+  transform: rotate(8deg);
+}
 .typePlaySolo,
 .typePlayWithFr {
   padding: 30px;
@@ -561,4 +566,8 @@ html {
   top: 100%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5767022a06263103d9cd7fa02ea8206d82b7ed0b
