@@ -98,21 +98,14 @@ class Register {
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                // Signed in 
-                var user = userCredential.user;
-                console.log(user);
-                // ...
-
                 db.collection('infoUser').doc(this.$inputGroupEmail.getInputValue())
                     .set({
                         name: this.$inputGroupName.getInputValue(),
                         email: this.$inputGroupEmail.getInputValue(),
-                        isOnl: true,
+                        inRoom: '',
                     })
                     .then(() => {
-                        // this.setVisible(false)
                     });
-
             })
             .catch((error) => {
                 var errorCode = error.code;

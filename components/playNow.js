@@ -52,12 +52,18 @@ class PlayNow {
                 .then((snapshot) => {
                     snapshot.forEach((doc) => {
                         this.$user4_me.innerHTML = doc.data().name;
+                        
+                        if (doc.data().inRoom !== '') {
+                            db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
+                                this.$user1.innerHTML = doc.data().name;
+                                console.log('ok')
+                            })
+                        }
                     });
-                })
+                    })
                 .catch((error) => {
                     console.log("Error getting documents: ", error);
                 });
-            } else {
             }
           });
 
@@ -71,7 +77,6 @@ class PlayNow {
         this.$submitAnswerButton.innerHTML = "Submit";
 
 //------------------------------------------------------test
-        this.$user1.innerHTML = "User1";
         this.$user2.innerHTML = "User2";
         this.$user3.innerHTML = "User3";
         this.$user4_me.innerHTML = '';

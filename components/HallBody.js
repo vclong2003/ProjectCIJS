@@ -29,7 +29,8 @@ class HallBody {
         this.$typePlayWithFr = document.createElement('div')
         this.$typePlayWithFr.classList.add('typePlayWithFr')
         this.$typePlayWithFr.addEventListener('click', () => { 
-            db.collection('rooms').doc(firebase.auth().currentUser.email).set({})
+            db.collection('rooms').doc(firebase.auth().currentUser.email).set({host: firebase.auth().currentUser.email});
+            db.collection("infoUser").doc(firebase.auth().currentUser.email).update({ isPlaying: true });
             setScreen(this.playWithFriends);
         });
         this.$playWithFr = new TypePlay('<i class="fa fa-users"></i>', 'Play with friends')
