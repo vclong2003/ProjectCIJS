@@ -16,8 +16,11 @@ class PlayNow {
     $user4_me;
 
     $questionAndAnswerContainer;
+    $areabtnReady;
 
     $question;
+    $timeCount;
+    $btnReady;
     $inputAnswer;
     $submitAnswerButton;
 
@@ -33,57 +36,101 @@ class PlayNow {
         this.$homeButton.classList.add('playnow-homebutton');
         this.$homeButton.addEventListener('click', backToHall)
         this.$header.appendChild(this.$homeButton);
-        
-        this.$content= document.createElement('div');
+
+        this.$content = document.createElement('div');
         this.$content.classList.add('playnow-content');
-                                                    
-        this.$user1 = document.createElement('div'); 
+
+        this.$user1 = document.createElement('div');
         this.$user1.classList.add("playnow-user-common", 'playnow-user1');
         this.$user2 = document.createElement('div');
         this.$user2.classList.add("playnow-user-common", 'playnow-user2');
-        this.$user3 = document.createElement('div'); 
+        this.$user3 = document.createElement('div');
         this.$user3.classList.add("playnow-user-common", 'playnow-user3');
         this.$user4_me = document.createElement('div');
         this.$user4_me.classList.add("playnow-user-common", 'playnow-user4');
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
-                .get()
-                .then((snapshot) => {
-                    snapshot.forEach((doc) => {
-                        this.$user4_me.innerHTML = doc.data().name;
+                db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
+                    .get()
+                    .then((snapshot) => {
+                        snapshot.forEach((doc) => {
+                            this.$user4_me.innerHTML = doc.data().name;
+                        });
+                    })
+                    .catch((error) => {
+                        console.log("Error getting documents: ", error);
                     });
-                })
-                .catch((error) => {
-                    console.log("Error getting documents: ", error);
-                });
             } else {
             }
-          });
+        });
 
+        //Định hình form
         this.$questionAndAnswerContainer = document.createElement('div');
-        this.$questionAndAnswerContainer.classList.add('playnow-question-answer-container');
+        this.$questionAndAnswerContainer.classList.add('playnow-question-answer-container', 'dis-hidden');
+
+        this.$areabtnReady = document.createElement('div');
+        this.$areabtnReady.classList.add('from-center');
+        this.$btnReady = document.createElement('button');
+        this.$btnReady.innerHTML = 'Ready';
+        this.$btnReady.classList.add('btnForm-link');
+        this.$btnReady.addEventListener('click', this.handlePlay);
 
         this.$question = document.createElement('div');
         this.$question.classList.add('playnow-question');
+
+
         this.$inputAnswer = new InputGroup('text', 'Type your answer here...');
+
+        this.$timeCount = document.createElement('div');
+
         this.$submitAnswerButton = document.createElement('button');
         this.$submitAnswerButton.innerHTML = "Submit";
+        this.$submitAnswerButton.addEventListener('click', this.handleSubmitAnswer);
 
-//------------------------------------------------------test
-        this.$user1.innerHTML = "User1";
-        this.$user2.innerHTML = "User2";
-        this.$user3.innerHTML = "User3";
-        this.$user4_me.innerHTML = '';
-        this.$question.innerHTML = "In your Firebase Realtime Database and Cloud Storage Security Rules, you can get the signed-in user's unique user ID from the auth variable, and use it to control what data a user can access.";
     }
 
-        render() {
+    handlePlay = () => {
+        this.$questionAndAnswerContainer.style.display = 'flex';
+        this.$areabtnReady.style.display = 'none';
+        this.handleQuestion();
+
+    };
+
+    handleQuestion = () => {
+        let questions = [];
+        let listquestion = [];
+        db.collection('questions')
+            .get()
+            .then((query) => {
+                query.forEach((doc) => {
+                    questions.push(doc.data());
+                })
+                for ( let i = 0; i < 5; i++) {
+                    let count = Math.floor(Math.random() * questions.length);
+                    listquestion.push(questions[count]);
+                    
+                }
+                console.log(questions);
+                console.log(listquestion);
+                this.$question.innerHTML = listquestion[0].question;
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        
+    };
+
+    handleSubmitAnswer = () => {
+        console.log('Submit successful');
+    };
+
+    render() {
         this.$questionAndAnswerContainer.appendChild(this.$question);
         this.$questionAndAnswerContainer.appendChild(this.$inputAnswer.render());
         this.$questionAndAnswerContainer.appendChild(this.$submitAnswerButton);
+        this.$areabtnReady.appendChild(this.$btnReady);
 
         this.$content.appendChild(this.$questionAndAnswerContainer);
+        this.$content.appendChild(this.$areabtnReady);
         this.$content.appendChild(this.$user1);
         this.$content.appendChild(this.$user2);
         this.$content.appendChild(this.$user3);
@@ -95,4 +142,4 @@ class PlayNow {
     }
 }
 
-export {PlayNow};
+export { PlayNow };
