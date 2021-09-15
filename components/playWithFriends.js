@@ -42,7 +42,11 @@ class PlayWithFriends {
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     db.collection("rooms").doc(firebase.auth().currentUser.email).delete().then(() => {
-                        console.log("Document successfully deleted!");
+                        console.log("Room deleted !");
+                        db.collection("infoUser").doc(firebase.auth().currentUser.email).update({ isPlaying: false });
+                        db.collection("infoUser").doc(this.player[0]).update({ inRoom: '' });
+                        db.collection("infoUser").doc(this.player[1]).update({ inRoom: '' });
+                        db.collection("infoUser").doc(this.player[2]).update({ inRoom: '' });
                         backToHall();
                     })
                 }
@@ -156,6 +160,7 @@ class PlayWithFriends {
                             })
                         });
                         db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player1: this.player[0] });
+                        db.collection("infoUser").doc(this.player[0]).update({ inRoom: firebase.auth().currentUser.email });
                     }                                                            // player1
                     if (this.player[1]) {
                         db.collection("infoUser").where("email", "==", this.player[1])
@@ -166,6 +171,7 @@ class PlayWithFriends {
                             })
                         });
                         db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player2: this.player[1] });
+                        db.collection("infoUser").doc(this.player[1]).update({ inRoom: firebase.auth().currentUser.email });
                     }                                                             // player2
                     if (this.player[2]) {
                         db.collection("infoUser").where("email", "==", this.player[2])
@@ -176,6 +182,7 @@ class PlayWithFriends {
                             })
                         });
                         db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player3: this.player[2] });
+                        db.collection("infoUser").doc(this.player[2]).update({ inRoom: firebase.auth().currentUser.email });
                     }                                                              // player3
                 }
             });

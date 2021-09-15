@@ -50,17 +50,23 @@ class PlayNow {
         this.$user4_me.classList.add("playnow-user-common", 'playnow-user4');
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
-                    .get()
-                    .then((snapshot) => {
-                        snapshot.forEach((doc) => {
-                            this.$user4_me.innerHTML = doc.data().name;
-                        });
-                    })
-                    .catch((error) => {
-                        console.log("Error getting documents: ", error);
+              db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
+                .get()
+                .then((snapshot) => {
+                    snapshot.forEach((doc) => {
+                        this.$user4_me.innerHTML = doc.data().name;
+                        
+                        if (doc.data().inRoom !== '') {
+                            db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
+                                this.$user1.innerHTML = doc.data().name;
+                                console.log('ok')
+                            })
+                        }
                     });
-            } else {
+                    })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
             }
         });
 
