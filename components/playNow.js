@@ -3,6 +3,9 @@ import { backToHall } from './Hall.js';
 
 class PlayNow {
 
+    host = '';
+    player = [];
+
     $container;
 
     $header;
@@ -55,7 +58,8 @@ class PlayNow {
                 .then((snapshot) => {
                     snapshot.forEach((doc) => {
                         this.$user4_me.innerHTML = doc.data().name;
-                        
+                        this.host = doc.data().inRoom;
+
                         if (doc.data().inRoom !== '') {
                             db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
                                 this.$user1.innerHTML = doc.data().name;
@@ -92,6 +96,15 @@ class PlayNow {
         this.$submitAnswerButton = document.createElement('button');
         this.$submitAnswerButton.innerHTML = "Submit";
         this.$submitAnswerButton.addEventListener('click', this.handleSubmitAnswer);
+
+        if (this.host != '') {
+            db.collection("rooms").doc(this.host)
+            .onSnapshot((doc) => {
+                console.log(doc.data().player);
+                this.player = doc.data().player;
+            })
+        }
+        
 
     }
 
