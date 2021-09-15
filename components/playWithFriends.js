@@ -159,7 +159,7 @@ class PlayWithFriends {
                                 this.$user1.innerHTML = doc.data().name;
                             })
                         });
-                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player1: this.player[0] });
+                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player: this.player });
                         db.collection("infoUser").doc(this.player[0]).update({ inRoom: firebase.auth().currentUser.email });
                     }                                                            // player1
                     if (this.player[1]) {
@@ -170,7 +170,7 @@ class PlayWithFriends {
                                 this.$user2.innerHTML = doc.data().name;
                             })
                         });
-                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player2: this.player[1] });
+                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player: this.player });
                         db.collection("infoUser").doc(this.player[1]).update({ inRoom: firebase.auth().currentUser.email });
                     }                                                             // player2
                     if (this.player[2]) {
@@ -181,7 +181,7 @@ class PlayWithFriends {
                                 this.$user3.innerHTML = doc.data().name;
                             })
                         });
-                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player3: this.player[2] });
+                        db.collection("rooms").doc(firebase.auth().currentUser.email).update({ player: this.player });
                         db.collection("infoUser").doc(this.player[2]).update({ inRoom: firebase.auth().currentUser.email });
                     }                                                              // player3
                 }
