@@ -43,7 +43,7 @@ class PlayWithFriends {
                 if (user) {
                     db.collection("rooms").doc(firebase.auth().currentUser.email).delete().then(() => {
                         console.log("Room deleted !");
-                        db.collection("infoUser").doc(firebase.auth().currentUser.email).update({ isPlaying: false });
+
                         db.collection("infoUser").doc(this.player[0]).update({ inRoom: '' });
                         db.collection("infoUser").doc(this.player[1]).update({ inRoom: '' });
                         db.collection("infoUser").doc(this.player[2]).update({ inRoom: '' });

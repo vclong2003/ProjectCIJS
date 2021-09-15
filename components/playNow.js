@@ -5,6 +5,7 @@ class PlayNow {
 
     host = '';
     player = [];
+    otherPlayer = [];
 
     $container;
 
@@ -54,20 +55,19 @@ class PlayNow {
         this.currentQuestionIndex = 0
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
-                    .get()
-                    .then((snapshot) => {
-                        snapshot.forEach((doc) => {
-                            this.$user4_me.innerHTML = doc.data().name;
-                            this.host = doc.data().inRoom;
+              db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
+                .get()
+                .then((snapshot) => {
+                    snapshot.forEach((doc) => {
+                        this.$user4_me.innerHTML = doc.data().name;
+                        this.host = doc.data().inRoom;
 
-                            // if (doc.data().inRoom !== '') {
-                            //     db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
-                            //         this.$user1.innerHTML = doc.data().name;
-                            //         console.log('ok')
-                            //     })
-                            // }
-                        });
+                        if (doc.data().inRoom !== '') {
+                            db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
+                                this.$user1.innerHTML = doc.data().name;
+                            })
+                        }
+                    });
                     })
                     .catch((error) => {
                         console.log("Error getting documents: ", error);
@@ -112,6 +112,28 @@ class PlayNow {
                     this.player = doc.data().player;
                 })
         }
+        for (let i = 0; i < this.player.length; i++){
+            if (this.player[i] != firebase.auth().currentUser.email) {
+                this.otherPlayer.push(this.player[i]);
+            }
+        }
+        for (let i = 0; i < this.otherPlayer.length; i++) {
+            if (this.$user2.innerHTML = '') {
+                db.collection("infoUser").doc(this.otherPlayer[i])
+                .get()
+                .then((doc) => {
+                    this.$user2.innerHTML = doc.data().name;
+                })
+            }
+            else {
+                db.collection("infoUser").doc(this.otherPlayer[i])
+                .get()
+                .then((doc) => {
+                    this.$user3.innerHTML = doc.data().name;
+                })
+            }
+        }
+
 
 
     }
