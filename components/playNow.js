@@ -19,7 +19,6 @@ class PlayNow {
     $areabtnReady;
 
     $question;
-    $timeCount;
     $btnReady;
     $inputAnswer;
     $submitAnswerButton;
@@ -50,23 +49,23 @@ class PlayNow {
         this.$user4_me.classList.add("playnow-user-common", 'playnow-user4');
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
-                .get()
-                .then((snapshot) => {
-                    snapshot.forEach((doc) => {
-                        this.$user4_me.innerHTML = doc.data().name;
-                        
-                        if (doc.data().inRoom !== '') {
-                            db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
-                                this.$user1.innerHTML = doc.data().name;
-                                console.log('ok')
-                            })
-                        }
-                    });
+                db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
+                    .get()
+                    .then((snapshot) => {
+                        snapshot.forEach((doc) => {
+                            this.$user4_me.innerHTML = doc.data().name;
+
+                            if (doc.data().inRoom !== '') {
+                                db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
+                                    this.$user1.innerHTML = doc.data().name;
+                                    console.log('ok')
+                                })
+                            }
+                        });
                     })
-                .catch((error) => {
-                    console.log("Error getting documents: ", error);
-                });
+                    .catch((error) => {
+                        console.log("Error getting documents: ", error);
+                    });
             }
         });
 
@@ -75,7 +74,7 @@ class PlayNow {
         this.$questionAndAnswerContainer.classList.add('playnow-question-answer-container', 'dis-hidden');
 
         this.$areabtnReady = document.createElement('div');
-        this.$areabtnReady.classList.add('from-center');
+        this.$areabtnReady.classList.add('btn-form-ready');
         this.$btnReady = document.createElement('button');
         this.$btnReady.innerHTML = 'Ready';
         this.$btnReady.classList.add('btnForm-link');
@@ -84,10 +83,7 @@ class PlayNow {
         this.$question = document.createElement('div');
         this.$question.classList.add('playnow-question');
 
-
         this.$inputAnswer = new InputGroup('text', 'Type your answer here...');
-
-        this.$timeCount = document.createElement('div');
 
         this.$submitAnswerButton = document.createElement('button');
         this.$submitAnswerButton.innerHTML = "Submit";
@@ -111,22 +107,45 @@ class PlayNow {
                 query.forEach((doc) => {
                     questions.push(doc.data());
                 })
-                for ( let i = 0; i < 5; i++) {
+                for (let i = 0; i < 5; i++) {
                     let count = Math.floor(Math.random() * questions.length);
                     listquestion.push(questions[count]);
-                    
+
                 }
                 console.log(questions);
                 console.log(listquestion);
-                this.$question.innerHTML = listquestion[0].question;
+                let i = 0;
+                let answer;
+                while ( i < listquestion.length) {
+                    this.$question.innerHTML = listquestion[i].question;
+        
+                    console.log(this.handleSubmitAnswer());
+                    // if (this.handleSubmitAnswer === 'Input your answer') {
+                    //     this.handleSubmitAnswer;
+                    // }
+                    // else if (this.handleSubmitAnswer === listquestion[i].answer) {
+                    //     alert('Correct');
+                    // } else {
+                    //     alert('Wrong');
+                    // }
+                    i++;
+                }
+                
+                
             }).catch((error) => {
                 console.log("Error getting documents: ", error);
             });
-        
+        console.log(listquestion);
     };
 
-    handleSubmitAnswer = () => {
-        console.log('Submit successful');
+    handleSubmitAnswer = (event) => {
+        event.preventDefault();
+        if (this.$inputAnswer.getInputValue() === "") {
+            alert("Input your answer");
+        } else {
+            console.log(this.$inputAnswer.getInputValue());
+            return this.$inputAnswer.getInputValue();
+        }
     };
 
     render() {

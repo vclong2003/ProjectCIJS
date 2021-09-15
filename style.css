@@ -572,3 +572,12 @@ html {
   display: none;
 }
 
+.btn-form-ready {
+  width: 30vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  flex-direction: column;
+}
