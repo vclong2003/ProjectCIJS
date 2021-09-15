@@ -50,22 +50,24 @@ class PlayNow {
         this.$user3.classList.add("playnow-user-common", 'playnow-user3');
         this.$user4_me = document.createElement('div');
         this.$user4_me.classList.add("playnow-user-common", 'playnow-user4');
+        this.questionList = [];
+        this.currentQuestionIndex = 0
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
-                .get()
-                .then((snapshot) => {
-                    snapshot.forEach((doc) => {
-                        this.$user4_me.innerHTML = doc.data().name;
-                        this.host = doc.data().inRoom;
+                db.collection("infoUser").where("email", "==", firebase.auth().currentUser.email)
+                    .get()
+                    .then((snapshot) => {
+                        snapshot.forEach((doc) => {
+                            this.$user4_me.innerHTML = doc.data().name;
+                            this.host = doc.data().inRoom;
 
-                        if (doc.data().inRoom !== '') {
-                            db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
-                                this.$user1.innerHTML = doc.data().name;
-                                console.log('ok')
-                            })
-                        }
-                    });
+                            // if (doc.data().inRoom !== '') {
+                            //     db.collection('infoUser').doc(doc.data().inRoom).onSnapshot((doc) => {
+                            //         this.$user1.innerHTML = doc.data().name;
+                            //         console.log('ok')
+                            //     })
+                            // }
+                        });
                     })
                     .catch((error) => {
                         console.log("Error getting documents: ", error);
@@ -91,19 +93,31 @@ class PlayNow {
 
         this.$submitAnswerButton = document.createElement('button');
         this.$submitAnswerButton.innerHTML = "Submit";
-        this.$submitAnswerButton.addEventListener('click', this.handleSubmitAnswer);
+        this.$submitAnswerButton.addEventListener('click', () => {
+            // console.log(this.$inputAnswer);
+            if (this.$inputAnswer.getInputValue() != "") {
+                this.handleSubmitAnswer(() => {
+                    this.$inputAnswer.getInputValue();
+                })
+            } else {
+                alert("Điền câu trả lời")
+            }
+
+        });
 
         if (this.host != '') {
             db.collection("rooms").doc(this.host)
-            .onSnapshot((doc) => {
-                console.log(doc.data().player);
-                this.player = doc.data().player;
-            })
+                .onSnapshot((doc) => {
+                    console.log(doc.data().player);
+                    this.player = doc.data().player;
+                })
         }
-        
+
 
     }
-
+    renderQuestion = (i) => {
+        this.$question.innerHTML = this.questionList[i].question;
+    }
     handlePlay = () => {
         this.$questionAndAnswerContainer.style.display = 'flex';
         this.$areabtnReady.style.display = 'none';
@@ -111,10 +125,10 @@ class PlayNow {
 
     };
 
-    handleQuestion = () => {
+    handleQuestion = async () => {
         let questions = [];
-        let listquestion = [];
-        db.collection('questions')
+        let listquestion = []
+        await db.collection('questions')
             .get()
             .then((query) => {
                 query.forEach((doc) => {
@@ -127,38 +141,50 @@ class PlayNow {
                 }
                 console.log(questions);
                 console.log(listquestion);
-                let i = 0;
-                let answer;
-                while ( i < listquestion.length) {
-                    this.$question.innerHTML = listquestion[i].question;
-        
-                    console.log(this.handleSubmitAnswer());
-                    // if (this.handleSubmitAnswer === 'Input your answer') {
-                    //     this.handleSubmitAnswer;
-                    // }
-                    // else if (this.handleSubmitAnswer === listquestion[i].answer) {
-                    //     alert('Correct');
-                    // } else {
-                    //     alert('Wrong');
-                    // }
-                    i++;
-                }
-                
-                
-            }).catch((error) => {
-                console.log("Error getting documents: ", error);
+                this.questionList = listquestion
+                this.renderQuestion(this.currentQuestionIndex)
+                // let i = 0;
+                // let answer;
+                // while ( i < listquestion.length) {
+                //     this.$question.innerHTML = listquestion[i].question;
+
+                //     // this.handleSubmitAnswer();
+                //     // console.log(this.handleSubmitAnswer());
+                //     // if (this.handleSubmitAnswer === 'Input your answer') {
+                //     //     this.handleSubmitAnswer;
+                //     // }
+                //     // else if (this.handleSubmitAnswer === listquestion[i].answer) {
+                //     //     alert('Correct');
+                //     // } else {
+                //     //     alert('Wrong');
+                //     // }
+                //     i++;
+                // }
+
+
             });
         console.log(listquestion);
     };
 
-    handleSubmitAnswer = (event) => {
-        event.preventDefault();
-        if (this.$inputAnswer.getInputValue() === "") {
-            alert("Input your answer");
+    handleSubmitAnswer = () => {
+        const userAnswer = this.$inputAnswer.getInputValue()
+        // event.preventDefault();
+        // console.log(this.$inputAnswer.getInputValue());
+        // console.log(this.$inputAnswer.getInputValue());
+        if (userAnswer === this.questionList[this.currentQuestionIndex].answer) {
+            alert("correct")
         } else {
-            console.log(this.$inputAnswer.getInputValue());
-            return this.$inputAnswer.getInputValue();
+            alert("wRONG")
         }
+        if (this.currentQuestionIndex < 4) {
+            this.currentQuestionIndex++
+            this.renderQuestion(this.currentQuestionIndex)
+        }
+        else {
+
+        }
+        // return this.$inputAnswer.getInputValue();
+
     };
 
     render() {
